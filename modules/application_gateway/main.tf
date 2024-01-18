@@ -79,7 +79,7 @@ resource "azurerm_application_gateway" "main" {
 
 
 
-dynamic "url_path_map" {
+ dynamic "url_path_map" {
   for_each = var.url_path_maps
   content {
     name = url_path_map.value.name
@@ -97,18 +97,16 @@ dynamic "url_path_map" {
 
     }
   }
+  }  
+ }
+
+}
+
+output "backend_pool_ids" {
+  value = {
+    for pool in azurerm_application_gateway.main.backend_address_pool : 
+      pool.name => pool.id
   }
-  
-  
-  
-
-  
 }
 
-}
-
-
-output "backend_address_pool_id" {
-  value = azurerm_application_gateway.main.backend_address_pool[*].id
-}
 

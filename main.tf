@@ -175,15 +175,16 @@ module "backend_target_nic1_pool1" {
   source = "./modules/backend_pools"
   ip_configuration_name = "nic-ipconfig"
   network_interface_id = module.network_nic.network_interface_id
-  backend_address_pool_id = module.apgw.backend_address_pool_id[0]
+  backend_address_pool_id = module.apgw.backend_pool_ids["ddm_backend_pool_images"]
 }
 
 module "backend_target_nic1_pool2" {
   source = "./modules/backend_pools"
   ip_configuration_name = "nic-ipconfig"
   network_interface_id = module.network_nic_1.network_interface_id
-  backend_address_pool_id = module.apgw.backend_address_pool_id[1]
+  backend_address_pool_id = module.apgw.backend_pool_ids["ddm_backend_pool_videos"]
 }
+
 
 
  
